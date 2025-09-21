@@ -138,7 +138,7 @@ Currently supports:
 - **Komal**
 - **Priyansh Gautam**
 - **Ritishaa Anand**
-- **Chenna**
+- **Bhukya Chenna Keshav**
 
 ## 🤝 Contributing
 
@@ -163,5 +163,6 @@ For support, questions, or feature requests, please open an issue in the reposit
 ---
 
 **Built with ❤️ to make legal documents accessible to everyone**
+
 
 
