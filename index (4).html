@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Legal Document Demystifier</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        if (window['pdfjsLib']) {
+            pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+        }
+        if (window['mermaid']) {
+            mermaid.initialize({ startOnLoad: false, theme: 'default' });
+        }
+    </script>
+</head>
+<body>
+    <header class="app-header">
+        <div class="brand">
+            <div class="logo-circle">LD</div>
+            <h1>Legal Document Demystifier</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="panel upload-panel">
+            <div class="panel-header">
+                <h2>Upload Legal Document</h2>
+            </div>
+            
+            <div class="controls-section">
+                <div class="controls">
+                    <div class="control-group">
+                        <label for="language">Language</label>
+                        <select id="language">
+                            <option value="English">English</option>
+                            <option value="Spanish">Spanish</option>
+                            <option value="French">French</option>
+                            <option value="German">German</option>
+                            <option value="Italian">Italian</option>
+                            <option value="Portuguese">Portuguese</option>
+                            <option value="Hindi">Hindi</option>
+                            <option value="Bengali">Bengali</option>
+                            <option value="Japanese">Japanese</option>
+                            <option value="Arabic">Arabic</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="persona">Persona</label>
+                        <select id="persona">
+                            <option value="student">Student</option>
+                            <option value="business_owner">Business Owner</option>
+                            <option value="lawyer">Lawyer</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="upload-box" id="dropZone">
+                <input id="fileInput" type="file" accept=".pdf,.txt" />
+                <div style="position: relative; z-index: 1;">
+                    <div style="font-size: 48px; margin-bottom: 16px; opacity: 0.6;">📄</div>
+                    <p style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--text);">
+                        Upload Your Legal Document
+                    </p>
+                    <p style="font-size: 14px; color: var(--muted); margin: 0;">
+                        Drag & drop a PDF or TXT file here, or click to browse
+                    </p>
+                </div>
+            </div>
+            
+            <div class="actions">
+                <button id="analyzeBtn" class="btn primary" disabled>Analyze Document</button>
+                <span id="status" class="status"></span>
+            </div>
+        </section>
+
+        <section class="dashboard">
+            <div class="panel summary-panel">
+                <h3>Document Summary</h3>
+                <div class="risk-legend">
+                    <span class="legend-item high">High Risk</span>
+                    <span class="legend-item medium">Medium Risk</span>
+                    <span class="legend-item low">Low Risk/Helpful</span>
+                </div>
+                <div id="summaryContent" class="summary-content"></div>
+            </div>
+        </section>
+
+        <section class="grid">
+            <div class="panel">
+                <h3>Proactive AI Questions</h3>
+                <ul id="proactiveList" class="list"></ul>
+            </div>
+            <div class="panel">
+                <h3>Balance Chart</h3>
+                <canvas id="balanceChart" height="140"></canvas>
+                <div id="balanceSummary" class="muted"></div>
+            </div>
+            <div class="panel">
+                <h3>Demystification Board</h3>
+                <div id="demystification" class="accordion"></div>
+            </div>
+            <div class="panel">
+                <h3>Document Roadmap</h3>
+                <div id="mermaidContainer" class="mermaid-block">
+                    <pre id="mermaidCode" class="code"></pre>
+                    <div id="mermaidRendered" class="mermaid"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h3 id="personaAdviceHeader">Persona-Specific Advice</h3>
+            <ul id="personaAdviceList" class="list"></ul>
+        </section>
+
+        <section class="panel risk-highlight-panel" id="riskHighlightPanel" style="display: none;">
+            <h3>Risk Analysis</h3>
+            <div class="risk-buttons">
+                <button id="showRiskyBtn" class="btn risk-btn high">Show Risky Clauses</button>
+                <button id="showMediumBtn" class="btn risk-btn medium">Show Medium Risk</button>
+                <button id="showHelpfulBtn" class="btn risk-btn low">Show Helpful Clauses</button>
+            </div>
+            <div id="riskDisplay" class="risk-display"></div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <span>Built with Gemini</span>
+    </footer>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
+
